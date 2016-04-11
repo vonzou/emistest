@@ -103,6 +103,6 @@ public class UserController {
 	public String deleteUserByPK(@PathVariable String id, HttpServletResponse response){
 		boolean isSucc = userService.delUserByPK(id) > 0;
 		
-		return "/demo/showUser";
+		return "demo/showUser";
 	}
 }

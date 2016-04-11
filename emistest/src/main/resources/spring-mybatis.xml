@@ -18,15 +18,15 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		<property name="password" value="${jdbc_password}" />
 
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="0" />
+		<property name="initialSize" value="${initialSize}" />
 		<!-- 连接池最大使用连接数量 -->
-		<property name="maxActive" value="20" />
+		<property name="maxActive" value="${maxActive}" />
 		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="5" />
+		<property name="maxIdle" value="${maxIdle}" />
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="0" />
+		<property name="minIdle" value="${minIdle}" />
 		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="60000" />
+		<property name="maxWait" value="${maxWait}" />
 
 		<!-- <property name="poolPreparedStatements" value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
 
@@ -36,14 +36,14 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		<property name="testWhileIdle" value="true" />
 
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
 
 		<!-- 打开removeAbandoned功能 -->
 		<property name="removeAbandoned" value="true" />
 		<!-- 1800秒，也就是30分钟 -->
-		<property name="removeAbandonedTimeout" value="1800" />
+		<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />
 		<!-- 关闭abanded连接时输出错误日志 -->
 		<property name="logAbandoned" value="true" />
 
@@ -58,11 +58,11 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		<!--configLocation属性指定mybatis的核心配置文件--> 
     	 <property name="configLocation" value="classpath:mybatis-config.xml" /> 
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath:net/emis/demo/mapper/*.xml" />
+		<property name="mapperLocations" value="classpath*:/net/emis/**/mapper/*.xml" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="net.emis.demo.dao" />
+		<property name="basePackage" value="net.emis..*.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -99,7 +99,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut id="transactionPointcut" expression="execution(* net.emis.demo.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* net.emis..*.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 
@@ -110,7 +110,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>net.emis.demo.service.*</value>
+				<value>net.emis..*.service.*</value>
 			</list>
 		</property>
 	</bean>
