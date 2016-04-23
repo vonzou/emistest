@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.emis.define.dao.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="net.emis.define.model.Dictionary" >
+    <id column="DictionaryID" property="dictionaryid" jdbcType="VARCHAR" />
+    <result column="DictionaryCode" property="dictionarycode" jdbcType="VARCHAR" />
+    <result column="DictionaryName" property="dictionaryname" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="EnableDelete" property="enabledelete" jdbcType="CHAR" />
+    <result column="Creater" property="creater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DictionaryID, DictionaryCode, DictionaryName, Note, EnableDelete, Creater
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from com_dictionary
+    where DictionaryID = #{dictionaryid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id = "selectByCode" resultMap = "BaseResultMap" parameterType="java.lang.String">
+  	select * 
+  	from com_dictionary 
+  	where 1=1
+  	and DictionaryCode = #{dictionarycode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id = "listAllDict" resultMap="BaseResultMap">
+  	select
+  	<include refid = "Base_Column_List"/>
+  	from com_dictionary	
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from com_dictionary
+    where DictionaryID = #{dictionaryid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="net.emis.define.model.Dictionary" >
+    insert into com_dictionary (DictionaryID, DictionaryCode, DictionaryName, 
+      Note, EnableDelete, Creater
+      )
+    values (#{dictionaryid,jdbcType=VARCHAR}, #{dictionarycode,jdbcType=VARCHAR}, #{dictionaryname,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{enabledelete,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.emis.define.model.Dictionary" >
+    insert into com_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionaryid != null" >
+        DictionaryID,
+      </if>
+      <if test="dictionarycode != null" >
+        DictionaryCode,
+      </if>
+      <if test="dictionaryname != null" >
+        DictionaryName,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="enabledelete != null" >
+        EnableDelete,
+      </if>
+      <if test="creater != null" >
+        Creater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionaryid != null" >
+        #{dictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionarycode != null" >
+        #{dictionarycode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryname != null" >
+        #{dictionaryname,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="enabledelete != null" >
+        #{enabledelete,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.emis.define.model.Dictionary" >
+    update com_dictionary
+    <set >
+      <if test="dictionarycode != null" >
+        DictionaryCode = #{dictionarycode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryname != null" >
+        DictionaryName = #{dictionaryname,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="enabledelete != null" >
+        EnableDelete = #{enabledelete,jdbcType=CHAR},
+      </if>
+      <if test="creater != null" >
+        Creater = #{creater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DictionaryID = #{dictionaryid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.emis.define.model.Dictionary" >
+    update com_dictionary
+    set DictionaryCode = #{dictionarycode,jdbcType=VARCHAR},
+      DictionaryName = #{dictionaryname,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      EnableDelete = #{enabledelete,jdbcType=CHAR},
+      Creater = #{creater,jdbcType=VARCHAR}
+    where DictionaryID = #{dictionaryid,jdbcType=VARCHAR}
+  </update>
+</mapper>

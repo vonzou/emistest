@@ -22,6 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     This is my JSP page. <br>
-    <a href = "${pageContext.request.contextPath}/jsp/demo/showUser.jsp">展示用户信息页面</a>
+    <a href = "${pageContext.request.contextPath}/jsp/demo/showUser.jsp">展示用户信息页面</a><br/>
+    <p/>
+    <a href="<%=path%>/jsp/define/dictionaryList.jsp">数据字典</a>
   </body>
 </html>

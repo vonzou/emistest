@@ -4,5 +4,9 @@
 <configuration>
     <typeAliases> 
         <typeAlias alias="User" type="net.emis.demo.model.User"/>
-    </typeAliases> 
+        <typeAlias alias="Dictionary" type="net.emis.define.model.Dictionary"/>
+        <typeAlias alias="DictionaryContent" type="net.emis.define.model.DictionaryContent"/>
+        <typeAlias alias="BaseTableDefine" type="net.emis.define.model.BaseTableDefine"/>
+        <typeAlias alias="BaseFieldDefine" type="net.emis.define.model.BaseFieldDefine"/>
+    </typeAliases>
 </configuration>

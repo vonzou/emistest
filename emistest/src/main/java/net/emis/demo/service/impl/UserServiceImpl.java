@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import net.emis.demo.dao.UserMapper;
 import net.emis.demo.model.User;
 import net.emis.demo.service.UserServiceI;
+import net.emis.util.Md5EncryptUtil;
 import net.emis.util.StringUtil;
 
 @Service("userService")
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserServiceI{
 	public int addUser(User u) {
 		String uuid = StringUtil.uuid();
 		u.setUuid(uuid);
+		String psd = Md5EncryptUtil.getMD5Encrypt(u.getPassword());
+		u.setPassword(psd);
 		return userMapper.insert(u);
 	}
 

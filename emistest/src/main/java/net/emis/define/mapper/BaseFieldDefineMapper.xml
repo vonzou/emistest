@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.emis.define.dao.BaseFieldDefineMapper" >
+  <resultMap id="BaseResultMap" type="net.emis.define.model.BaseFieldDefine" >
+    <id column="FD_UUID" property="fdUuid" jdbcType="VARCHAR" />
+    <result column="FD_TABLEUUID" property="fdTableuuid" jdbcType="VARCHAR" />
+    <result column="FD_CODE" property="fdCode" jdbcType="VARCHAR" />
+    <result column="FD_NAME" property="fdName" jdbcType="VARCHAR" />
+    <result column="FD_ISKEY" property="fdIskey" jdbcType="VARCHAR" />
+    <result column="FD_FIELDTYPE" property="fdFieldtype" jdbcType="VARCHAR" />
+    <result column="FD_LENGTH" property="fdLength" jdbcType="INTEGER" />
+    <result column="FD_DECIMAL" property="fdDecimal" jdbcType="INTEGER" />
+    <result column="FD_DICTIONCODE" property="fdDictioncode" jdbcType="VARCHAR" />
+    <result column="FD_DEFAULT" property="fdDefault" jdbcType="VARCHAR" />
+    <result column="FD_NOTNULL" property="fdNotnull" jdbcType="CHAR" />
+    <result column="FD_USABLE" property="fdUsable" jdbcType="CHAR" />
+    <result column="FD_DESCRIBE" property="fdDescribe" jdbcType="VARCHAR" />
+    <result column="FD_SOURCETYPE" property="fdSourcetype" jdbcType="CHAR" />
+    <result column="FD_FORMULA" property="fdFormula" jdbcType="VARCHAR" />
+    <result column="FD_GETSOURCE" property="fdGetsource" jdbcType="VARCHAR" />
+    <result column="FD_GETFIELD" property="fdGetfield" jdbcType="VARCHAR" />
+    <result column="FD_WHERECLAUSE" property="fdWhereclause" jdbcType="CHAR" />
+    <result column="FD_CHECKTYPE" property="fdChecktype" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FD_UUID, FD_TABLEUUID, FD_CODE, FD_NAME, FD_ISKEY, FD_FIELDTYPE, FD_LENGTH, FD_DECIMAL, 
+    FD_DICTIONCODE, FD_DEFAULT, FD_NOTNULL, FD_USABLE, FD_DESCRIBE, FD_SOURCETYPE, FD_FORMULA, 
+    FD_GETSOURCE, FD_GETFIELD, FD_WHERECLAUSE, FD_CHECKTYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_fielddefine
+    where FD_UUID = #{fdUuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from base_fielddefine
+    where FD_UUID = #{fdUuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="net.emis.define.model.BaseFieldDefine" >
+    insert into base_fielddefine (FD_UUID, FD_TABLEUUID, FD_CODE, 
+      FD_NAME, FD_ISKEY, FD_FIELDTYPE, 
+      FD_LENGTH, FD_DECIMAL, FD_DICTIONCODE, 
+      FD_DEFAULT, FD_NOTNULL, FD_USABLE, 
+      FD_DESCRIBE, FD_SOURCETYPE, FD_FORMULA, 
+      FD_GETSOURCE, FD_GETFIELD, FD_WHERECLAUSE, 
+      FD_CHECKTYPE)
+    values (#{fdUuid,jdbcType=VARCHAR}, #{fdTableuuid,jdbcType=VARCHAR}, #{fdCode,jdbcType=VARCHAR}, 
+      #{fdName,jdbcType=VARCHAR}, #{fdIskey,jdbcType=VARCHAR}, #{fdFieldtype,jdbcType=VARCHAR}, 
+      #{fdLength,jdbcType=INTEGER}, #{fdDecimal,jdbcType=INTEGER}, #{fdDictioncode,jdbcType=VARCHAR}, 
+      #{fdDefault,jdbcType=VARCHAR}, #{fdNotnull,jdbcType=CHAR}, #{fdUsable,jdbcType=CHAR}, 
+      #{fdDescribe,jdbcType=VARCHAR}, #{fdSourcetype,jdbcType=CHAR}, #{fdFormula,jdbcType=VARCHAR}, 
+      #{fdGetsource,jdbcType=VARCHAR}, #{fdGetfield,jdbcType=VARCHAR}, #{fdWhereclause,jdbcType=CHAR}, 
+      #{fdChecktype,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.emis.define.model.BaseFieldDefine" >
+    insert into base_fielddefine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fdUuid != null" >
+        FD_UUID,
+      </if>
+      <if test="fdTableuuid != null" >
+        FD_TABLEUUID,
+      </if>
+      <if test="fdCode != null" >
+        FD_CODE,
+      </if>
+      <if test="fdName != null" >
+        FD_NAME,
+      </if>
+      <if test="fdIskey != null" >
+        FD_ISKEY,
+      </if>
+      <if test="fdFieldtype != null" >
+        FD_FIELDTYPE,
+      </if>
+      <if test="fdLength != null" >
+        FD_LENGTH,
+      </if>
+      <if test="fdDecimal != null" >
+        FD_DECIMAL,
+      </if>
+      <if test="fdDictioncode != null" >
+        FD_DICTIONCODE,
+      </if>
+      <if test="fdDefault != null" >
+        FD_DEFAULT,
+      </if>
+      <if test="fdNotnull != null" >
+        FD_NOTNULL,
+      </if>
+      <if test="fdUsable != null" >
+        FD_USABLE,
+      </if>
+      <if test="fdDescribe != null" >
+        FD_DESCRIBE,
+      </if>
+      <if test="fdSourcetype != null" >
+        FD_SOURCETYPE,
+      </if>
+      <if test="fdFormula != null" >
+        FD_FORMULA,
+      </if>
+      <if test="fdGetsource != null" >
+        FD_GETSOURCE,
+      </if>
+      <if test="fdGetfield != null" >
+        FD_GETFIELD,
+      </if>
+      <if test="fdWhereclause != null" >
+        FD_WHERECLAUSE,
+      </if>
+      <if test="fdChecktype != null" >
+        FD_CHECKTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fdUuid != null" >
+        #{fdUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="fdTableuuid != null" >
+        #{fdTableuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="fdCode != null" >
+        #{fdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fdName != null" >
+        #{fdName,jdbcType=VARCHAR},
+      </if>
+      <if test="fdIskey != null" >
+        #{fdIskey,jdbcType=VARCHAR},
+      </if>
+      <if test="fdFieldtype != null" >
+        #{fdFieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fdLength != null" >
+        #{fdLength,jdbcType=INTEGER},
+      </if>
+      <if test="fdDecimal != null" >
+        #{fdDecimal,jdbcType=INTEGER},
+      </if>
+      <if test="fdDictioncode != null" >
+        #{fdDictioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fdDefault != null" >
+        #{fdDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="fdNotnull != null" >
+        #{fdNotnull,jdbcType=CHAR},
+      </if>
+      <if test="fdUsable != null" >
+        #{fdUsable,jdbcType=CHAR},
+      </if>
+      <if test="fdDescribe != null" >
+        #{fdDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="fdSourcetype != null" >
+        #{fdSourcetype,jdbcType=CHAR},
+      </if>
+      <if test="fdFormula != null" >
+        #{fdFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="fdGetsource != null" >
+        #{fdGetsource,jdbcType=VARCHAR},
+      </if>
+      <if test="fdGetfield != null" >
+        #{fdGetfield,jdbcType=VARCHAR},
+      </if>
+      <if test="fdWhereclause != null" >
+        #{fdWhereclause,jdbcType=CHAR},
+      </if>
+      <if test="fdChecktype != null" >
+        #{fdChecktype,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.emis.define.model.BaseFieldDefine" >
+    update base_fielddefine
+    <set >
+      <if test="fdTableuuid != null" >
+        FD_TABLEUUID = #{fdTableuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="fdCode != null" >
+        FD_CODE = #{fdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fdName != null" >
+        FD_NAME = #{fdName,jdbcType=VARCHAR},
+      </if>
+      <if test="fdIskey != null" >
+        FD_ISKEY = #{fdIskey,jdbcType=VARCHAR},
+      </if>
+      <if test="fdFieldtype != null" >
+        FD_FIELDTYPE = #{fdFieldtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fdLength != null" >
+        FD_LENGTH = #{fdLength,jdbcType=INTEGER},
+      </if>
+      <if test="fdDecimal != null" >
+        FD_DECIMAL = #{fdDecimal,jdbcType=INTEGER},
+      </if>
+      <if test="fdDictioncode != null" >
+        FD_DICTIONCODE = #{fdDictioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fdDefault != null" >
+        FD_DEFAULT = #{fdDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="fdNotnull != null" >
+        FD_NOTNULL = #{fdNotnull,jdbcType=CHAR},
+      </if>
+      <if test="fdUsable != null" >
+        FD_USABLE = #{fdUsable,jdbcType=CHAR},
+      </if>
+      <if test="fdDescribe != null" >
+        FD_DESCRIBE = #{fdDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="fdSourcetype != null" >
+        FD_SOURCETYPE = #{fdSourcetype,jdbcType=CHAR},
+      </if>
+      <if test="fdFormula != null" >
+        FD_FORMULA = #{fdFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="fdGetsource != null" >
+        FD_GETSOURCE = #{fdGetsource,jdbcType=VARCHAR},
+      </if>
+      <if test="fdGetfield != null" >
+        FD_GETFIELD = #{fdGetfield,jdbcType=VARCHAR},
+      </if>
+      <if test="fdWhereclause != null" >
+        FD_WHERECLAUSE = #{fdWhereclause,jdbcType=CHAR},
+      </if>
+      <if test="fdChecktype != null" >
+        FD_CHECKTYPE = #{fdChecktype,jdbcType=CHAR},
+      </if>
+    </set>
+    where FD_UUID = #{fdUuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.emis.define.model.BaseFieldDefine" >
+    update base_fielddefine
+    set FD_TABLEUUID = #{fdTableuuid,jdbcType=VARCHAR},
+      FD_CODE = #{fdCode,jdbcType=VARCHAR},
+      FD_NAME = #{fdName,jdbcType=VARCHAR},
+      FD_ISKEY = #{fdIskey,jdbcType=VARCHAR},
+      FD_FIELDTYPE = #{fdFieldtype,jdbcType=VARCHAR},
+      FD_LENGTH = #{fdLength,jdbcType=INTEGER},
+      FD_DECIMAL = #{fdDecimal,jdbcType=INTEGER},
+      FD_DICTIONCODE = #{fdDictioncode,jdbcType=VARCHAR},
+      FD_DEFAULT = #{fdDefault,jdbcType=VARCHAR},
+      FD_NOTNULL = #{fdNotnull,jdbcType=CHAR},
+      FD_USABLE = #{fdUsable,jdbcType=CHAR},
+      FD_DESCRIBE = #{fdDescribe,jdbcType=VARCHAR},
+      FD_SOURCETYPE = #{fdSourcetype,jdbcType=CHAR},
+      FD_FORMULA = #{fdFormula,jdbcType=VARCHAR},
+      FD_GETSOURCE = #{fdGetsource,jdbcType=VARCHAR},
+      FD_GETFIELD = #{fdGetfield,jdbcType=VARCHAR},
+      FD_WHERECLAUSE = #{fdWhereclause,jdbcType=CHAR},
+      FD_CHECKTYPE = #{fdChecktype,jdbcType=CHAR}
+    where FD_UUID = #{fdUuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

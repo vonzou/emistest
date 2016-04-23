@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.emis.define.dao.BaseTableDefineMapper" >
+  <resultMap id="BaseResultMap" type="net.emis.define.model.BaseTableDefine" >
+    <id column="TD_UUID" property="tdUuid" jdbcType="VARCHAR" />
+    <result column="TD_CODE" property="tdCode" jdbcType="VARCHAR" />
+    <result column="TD_NAME" property="tdName" jdbcType="VARCHAR" />
+    <result column="TD_USABLE" property="tdUsable" jdbcType="CHAR" />
+    <result column="TD_DESCRIBE" property="tdDescribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TD_UUID, TD_CODE, TD_NAME, TD_USABLE, TD_DESCRIBE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_tabledefine
+    where TD_UUID = #{tdUuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from base_tabledefine
+    where TD_UUID = #{tdUuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="net.emis.define.model.BaseTableDefine" >
+    insert into base_tabledefine (TD_UUID, TD_CODE, TD_NAME, 
+      TD_USABLE, TD_DESCRIBE)
+    values (#{tdUuid,jdbcType=VARCHAR}, #{tdCode,jdbcType=VARCHAR}, #{tdName,jdbcType=VARCHAR}, 
+      #{tdUsable,jdbcType=CHAR}, #{tdDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.emis.define.model.BaseTableDefine" >
+    insert into base_tabledefine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tdUuid != null" >
+        TD_UUID,
+      </if>
+      <if test="tdCode != null" >
+        TD_CODE,
+      </if>
+      <if test="tdName != null" >
+        TD_NAME,
+      </if>
+      <if test="tdUsable != null" >
+        TD_USABLE,
+      </if>
+      <if test="tdDescribe != null" >
+        TD_DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tdUuid != null" >
+        #{tdUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tdCode != null" >
+        #{tdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tdName != null" >
+        #{tdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tdUsable != null" >
+        #{tdUsable,jdbcType=CHAR},
+      </if>
+      <if test="tdDescribe != null" >
+        #{tdDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.emis.define.model.BaseTableDefine" >
+    update base_tabledefine
+    <set >
+      <if test="tdCode != null" >
+        TD_CODE = #{tdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tdName != null" >
+        TD_NAME = #{tdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tdUsable != null" >
+        TD_USABLE = #{tdUsable,jdbcType=CHAR},
+      </if>
+      <if test="tdDescribe != null" >
+        TD_DESCRIBE = #{tdDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TD_UUID = #{tdUuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.emis.define.model.BaseTableDefine" >
+    update base_tabledefine
+    set TD_CODE = #{tdCode,jdbcType=VARCHAR},
+      TD_NAME = #{tdName,jdbcType=VARCHAR},
+      TD_USABLE = #{tdUsable,jdbcType=CHAR},
+      TD_DESCRIBE = #{tdDescribe,jdbcType=VARCHAR}
+    where TD_UUID = #{tdUuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

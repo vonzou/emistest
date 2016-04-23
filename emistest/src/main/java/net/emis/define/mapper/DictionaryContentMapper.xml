@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.emis.define.dao.DictionaryContentMapper" >
+  <resultMap id="BaseResultMap" type="net.emis.define.model.DictionaryContent" >
+    <id column="ContentID" property="contentid" jdbcType="VARCHAR" />
+    <result column="DictionaryID" property="dictionaryid" jdbcType="VARCHAR" />
+    <result column="ItemName" property="itemname" jdbcType="VARCHAR" />
+    <result column="ItemValue" property="itemvalue" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="CHAR" />
+    <result column="SortInfo" property="sortinfo" jdbcType="INTEGER" />
+    <result column="Creater" property="creater" jdbcType="VARCHAR" />
+    <result column="ParentContentID" property="parentcontentid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ContentID, DictionaryID, ItemName, ItemValue, Description, Status, SortInfo, Creater, 
+    ParentContentID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from com_dictionarycontent
+    where ContentID = #{contentid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id = "findByDictContCode" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+  	select *
+  	from com_dictionarycontent
+  	where 1=1
+  	and ItemName = #{itemname}
+  	and DictionaryID = #{dictionaryid}
+  </select>
+  
+  <select id = "findByDictId" resultMap = "BaseResultMap" parameterType = "java.lang.String">
+  	select * 
+  	from com_dictionarycontent
+  	where DictionaryID = #{dictionaryid}
+  	order by SortInfo
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from com_dictionarycontent
+    where ContentID = #{contentid,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id = "deleteByDictId" parameterType = "java.lang.String">
+  	delete from com_dictionarycontent
+  	where DictionaryID = #{dictionaryid}
+  </delete>
+  
+  <insert id="insert" parameterType="net.emis.define.model.DictionaryContent" >
+    insert into com_dictionarycontent (ContentID, DictionaryID, ItemName, 
+      ItemValue, Description, Status, 
+      SortInfo, Creater, ParentContentID
+      )
+    values (#{contentid,jdbcType=VARCHAR}, #{dictionaryid,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, 
+      #{itemvalue,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{sortinfo,jdbcType=INTEGER}, #{creater,jdbcType=VARCHAR}, #{parentcontentid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.emis.define.model.DictionaryContent" >
+    insert into com_dictionarycontent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentid != null" >
+        ContentID,
+      </if>
+      <if test="dictionaryid != null" >
+        DictionaryID,
+      </if>
+      <if test="itemname != null" >
+        ItemName,
+      </if>
+      <if test="itemvalue != null" >
+        ItemValue,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="sortinfo != null" >
+        SortInfo,
+      </if>
+      <if test="creater != null" >
+        Creater,
+      </if>
+      <if test="parentcontentid != null" >
+        ParentContentID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentid != null" >
+        #{contentid,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryid != null" >
+        #{dictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemvalue != null" >
+        #{itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="sortinfo != null" >
+        #{sortinfo,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcontentid != null" >
+        #{parentcontentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.emis.define.model.DictionaryContent" >
+    update com_dictionarycontent
+    <set >
+      <if test="dictionaryid != null" >
+        DictionaryID = #{dictionaryid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null" >
+        ItemName = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemvalue != null" >
+        ItemValue = #{itemvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="sortinfo != null" >
+        SortInfo = #{sortinfo,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        Creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcontentid != null" >
+        ParentContentID = #{parentcontentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ContentID = #{contentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.emis.define.model.DictionaryContent" >
+    update com_dictionarycontent
+    set DictionaryID = #{dictionaryid,jdbcType=VARCHAR},
+      ItemName = #{itemname,jdbcType=VARCHAR},
+      ItemValue = #{itemvalue,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=CHAR},
+      SortInfo = #{sortinfo,jdbcType=INTEGER},
+      Creater = #{creater,jdbcType=VARCHAR},
+      ParentContentID = #{parentcontentid,jdbcType=VARCHAR}
+    where ContentID = #{contentid,jdbcType=VARCHAR}
+  </update>
+</mapper>
